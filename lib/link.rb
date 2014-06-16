@@ -3,7 +3,7 @@
 
 class Link
 	# this makes the instances of this class Datamapper resources
-	include DataMapper::resources
+	include DataMapper::Resource
 
 	# this block describes what resources our model will have
 	property :id, 		Serial # serial means that it will be auto-inremented for every second
