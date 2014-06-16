@@ -1,3 +1,4 @@
+require 'sinatra'
 require 'data_mapper'
 
 env = ENV['RACK_ENV'] || "development"
@@ -13,3 +14,8 @@ DataMapper.finalize
 
 # however, the database tables don't exist yet. let's tell datamapper to create them
 DataMapper.auto_upgrade!
+
+get '/' do
+	@links = Link.all
+	erb	:index
+end
