@@ -1,4 +1,7 @@
 require 'spec_helper'
+require_relative 'helpers/session'
+
+include SessionHelpers
 
 feature 'User signs out' do
 
@@ -58,16 +61,6 @@ feature 'User signs up' do
 		lambda { sign_up }.should change(User, :count).by(0)
 		# expect{sign_up}.to change{User.count}.from(1).to(0)
 		expect(page).to have_content("This email is already taken")
-	end
-
-	def sign_up(email = "alice@example.com", password = "oranges!", password_confirmation = "oranges!")
-		visit 'users/new'
-		expect(page.status_code).to eq(200)
-		expect(page.status_code).to eq(200)
-		fill_in :email, :with => email
-		fill_in :password, :with => password
-		fill_in :password_confirmation, :with => password_confirmation
-		click_button "Sign up"
 	end
 
 end
