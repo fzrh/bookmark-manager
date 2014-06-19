@@ -29,6 +29,8 @@ post '/recovery' do
 		user.password_token = (1..64).map{('A'..'Z').to_a.sample}.join
 		user.password_token_timestamp = Time.now
 		user.save
+		flash[:notice] = "Thanks. A recovery email has been sent" 
+		redirect to('/')
 	else
 		flash[:errors] = @user.errors.full_messages
 		erb :"users/new"
@@ -36,6 +38,7 @@ post '/recovery' do
 end
 
 get '/users/reset_password/:token' do
-	user = User.first(:password_token => token)
+	token = params[:token]
+	@user = User.first(:password_token => token)
 end
 
