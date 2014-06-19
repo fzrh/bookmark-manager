@@ -1,5 +1,8 @@
 require 'data_mapper'
 require './app/data_mapper_setup'
+require './app/models/link'
+require './app/models/tag'
+require './app/models/user'
 
 task :auto_upgrade do
 	# auto_upgrade makes non-destructive changes.

@@ -17,3 +17,25 @@ post '/users' do
 		erb :"users/new"
 	end
 end
+
+get '/sessions/forgot_password' do
+	erb :"sessions/forgot_password"
+end
+
+post '/recovery' do
+	if	email = params[:email]
+		user = User.first(:email => email)
+		# avoid having to memorise ascii codes
+		user.password_token = (1..64).map{('A'..'Z').to_a.sample}.join
+		user.password_token_timestamp = Time.now
+		user.save
+	else
+		flash[:errors] = @user.errors.full_messages
+		erb :"users/new"
+	end		
+end
+
+get '/users/reset_password/:token' do
+	user = User.first(:password_token => token)
+end
+

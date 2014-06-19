@@ -19,13 +19,17 @@ class User
   # has both the password hash and the salt. we save it to the 
   # database instead of the plain password for security reasons.
 
+  property :password_token, Text
+  property :password_token_timestamp, Text
+
+
   def password=(password)
     @password = password
   	self.password_digest = BCrypt::Password.create(password)
   end
 
-  attr_reader :password
-  attr_accessor :password_confirmation
+  attr_reader :password, :password_token, :password_token_timestamp
+  attr_accessor :password_confirmation, :password_token, :password_token_timestamp
 
   # this is datamapper's method of validating the model
   # the model will not be saved unless both password
@@ -53,6 +57,6 @@ class User
     else
       nil
     end
-  end    
+  end  
 
 end
