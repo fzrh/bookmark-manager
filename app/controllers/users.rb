@@ -23,8 +23,8 @@ get '/sessions/forgot_password' do
 end
 
 post '/recovery' do
-	if	email = params[:email]
-		user = User.first(:email => email)
+	email = params[:email]
+	if	user = User.first(:email => email)
 		# avoid having to memorise ascii codes
 		user.password_token = (1..64).map{('A'..'Z').to_a.sample}.join
 		user.password_token_timestamp = Time.now
@@ -32,13 +32,13 @@ post '/recovery' do
 		flash[:notice] = "Thanks. A recovery email has been sent" 
 		redirect to('/')
 	else
-		flash[:errors] = @user.errors.full_messages
+		# flash[:errors] = @users.errors.full_messages
 		erb :"users/new"
 	end		
 end
 
-get '/users/reset_password/:token' do
-	token = params[:token]
-	@user = User.first(:password_token => token)
-end
+# get '/users/reset_password/:token' do
+# 	token = params[:token]
+# 	@user = User.first(:password_token => token)
+# end
 
