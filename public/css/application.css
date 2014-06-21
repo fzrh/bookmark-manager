@@ -1,5 +1,6 @@
 body {
   font-family: Helvetica, Arial, Sans-serif;
+  background-image: url(/images/extra_clean_paper.png)
 }
 
 a.button {
@@ -17,9 +18,14 @@ a.button {
   text-shadow: 0 0 2px rgba(0,0,0, 0.4); /*for readability*/
 }
 
+/* a link that has both classes. Overrides the previous declaration */
+a.button.highlighted {
+  background-color: #b77843;
+}
+
 header {  
   height: 40px;
-  background-color: #4099FF;
+  background-color: black;
   color: white;
   display: flex; /* http://learnlayout.com/flexbox.html */
   padding: 0 20px;
@@ -30,7 +36,13 @@ header {
     margin: auto 0;
   }
   header #logo {    
-    display: flex;      
+    display: flex;   
+    margin-right: 20px;   
+  }
+
+  header a {
+    color: white;
+    text-decoration: none;
   }
 
   header #user-links {
